@@ -1,12 +1,7 @@
-//
-//  ViewController.m
-//  BouncingBear
-//
-//  Created by Mighty on 2014/11/04.
-//  Copyright (c) 2014年 Shunsuke Ogata. All rights reserved.
-//
 
 #import "ViewController.h"
+#import "GameView.h"
+#import <SpriteKit/SpriteKit.h>
 
 @interface ViewController ()
 
@@ -14,9 +9,23 @@
 
 @implementation ViewController
 
+- (void)loadView{
+	CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+	SKView *skView = [[SKView alloc] initWithFrame:applicationFrame];
+	self.view = skView;
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+	SKView *skView = (SKView *)self.view;
+	skView.showsDrawCount = YES;
+	skView.showsNodeCount = YES;
+	skView.showsFPS = YES;
+	
+	SKScene *scene = [GameView sceneWithSize:self.view.bounds.size];
+	scene.backgroundColor = [UIColor grayColor];
+	[skView presentScene:scene];
 }
 
 - (void)didReceiveMemoryWarning {
